@@ -20,4 +20,10 @@ Variables included in the dataset are as follows:
 Questions answered by this analysis include:
 * Are there differences in website behavior that differ between the two campaigns?
 
+## Data Cleaning & Preparation
+
 ## Data Exploration
+
+## Tests of Significance Between Conditions
+
+
