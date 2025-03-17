@@ -398,9 +398,9 @@ for j in range(i + 1, len(axes)):
 plt.tight_layout()
 plt.show()
 
-
 ```
 
+![png](output_11_0.png)
 
 
 ## Looking for confounding relationships.
