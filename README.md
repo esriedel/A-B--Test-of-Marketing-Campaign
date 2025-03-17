@@ -2,9 +2,11 @@
 
 ## Summary
 
+Control and treatment marketing campaigns were tested for their impact on website sales over 30 days in August 2019.
 * No evidence that treatment campaign outperformed control campaign.
-* Control campaign generated more impressions, content, and items in the cart.
-* Suggestive data that under treatment campaign, items in the cart were more likely to be translated into purchases.
+* Treatment group received a greater amount of spend for marketing during the campaign.
+* Control group generated more impressions, reach, and items in the cart (though not actual purchases).
+* Possibility that under treatment condition, items in the cart were more likely to be translated into purchases. But not statistically significant.
 
 ## Introduction
 
@@ -23,12 +25,16 @@ Variables included in the dataset are as follows:
 * Cart: Number of users who added products to the cart
 * Number of purchases
 
-Questions answered by this analysis include:
-* Are there differences in website behavior that differ between the two campaigns?
 
 ## Data Cleaning & Preparation
 
-## Data Exploration
+
+
+
+## Exploratory Data Analysis 
+
+
+
 
 ## Tests of Significance Between Conditions
 
