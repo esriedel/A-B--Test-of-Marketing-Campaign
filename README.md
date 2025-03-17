@@ -250,32 +250,29 @@ plt.show()
     
 ### Examining distribution of variables by condition over time.
 
-#### Since the two marketing campaigns were conducted and measured on the same days, I wanted to check on common variance between the two marketing conditions that would call into question using an assumption of independent samples in testing differences. Over-time trends appeared random over time and not correlated between the two campaigns. A non-parametric test assuming independence of samples will be used (Mann Whitley U Test).
+#### Since the two marketing campaigns were conducted and measured on the same days, I wanted to check on common variance between the two marketing conditions that would call into question using an assumption of independent samples in testing differences. Over-time trends appeared random over time and not correlated between the two campaigns. A non-parametric test assuming independence of samples will be used (Mann Whitney U Test). If there was strong correlation over time, then I would consider a paired test such Wilcoxon Signed-Rank test.
 
 ```python
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+#Show subplots of variables over time by condition
 variables = ['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']
 
-# Set up the figure with subplots in a horizontal layout
 n_cols = 2  # Number of columns you want
 n_rows = len(variables) // n_cols + (len(variables) % n_cols > 0)  # Number of rows, based on the number of variables
 fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 6 * n_rows))
 axes = axes.flatten()
 
-# Loop through the variables and create a line plot for each
 for i, var in enumerate(variables):
     sns.lineplot(data=market_df, x='Date2', y=var, hue='condition', ax=axes[i])
     axes[i].set_title(f'Line plot of {var} over time')
     axes[i].set_xlabel('Date')  # Add x-label for clarity
     axes[i].set_ylabel(var)     # Add y-label for clarity
 
-# Remove unused subplots if any
 for j in range(i + 1, len(axes)):
     axes[j].axis('off')  # Hide empty subplots
 
-# Adjust the layout to avoid overlap
 plt.tight_layout()
 plt.show()
 ```
@@ -312,39 +309,33 @@ print("\nMedians by Category (using pivot_table()):\n", medians_pivot)
 
 ```python
 from scipy.stats import mannwhitneyu
-# Group column and outcome columns
+
+# Perform Mann-Whitney U Test for Statistically Significant Differences by Condition
 group_column = 'condition'
 outcome_columns = ['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']
 
-# Function to perform Mann-Whitney U test on multiple columns
 def mann_whitney_multiple(market_df, group_column, outcome_columns):
     results = []
     
-    # Loop through each outcome column
     for column in outcome_columns:
         # Split the data into two groups based on the group_column
         group_1 = market_df[market_df[group_column] == market_df[group_column].unique()[0]][column]
         group_2 = market_df[market_df[group_column] == market_df[group_column].unique()[1]][column]
-        
-        # Perform the Mann-Whitney U test
+ 
         stat, p_value = mannwhitneyu(group_1, group_2)
         
-        # Append the result
-        results.append({
+         results.append({
             'Outcome': column,
             'U-Statistic': stat,
             'p-value': p_value
         })
     
-    # Convert results to a DataFrame
     results_df = pd.DataFrame(results)
     
     return results_df
 
-# Call the function to get results
 results_df = mann_whitney_multiple(market_df, group_column, outcome_columns)
 
-# Print the results
 print(results_df)
 
 ```
@@ -366,29 +357,23 @@ print(results_df)
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# List of the variables you're interested in
+# Create boxplots of variables by condition
 variables = ['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']
 
-# Set up the figure with subplots in a horizontal layout
 n_cols = 4  # Number of columns you want
 n_rows = len(variables) // n_cols + (len(variables) % n_cols > 0)  # Number of rows, based on the number of variables
 
-# Set up the figure with the right number of rows and columns
 fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 6 * n_rows))
 
-# Flatten axes array to easily index them
 axes = axes.flatten()
 
-# Loop through the variables and create a boxplot for each
 for i, var in enumerate(variables):
     sns.boxplot(x="condition", y=var, data=market_df, ax=axes[i])
     axes[i].set_title(f'Boxplot of {var} by Condition')
 
-# Remove unused subplots if any
 for j in range(i + 1, len(axes)):
     axes[j].axis('off')  # Hide empty subplots
 
-# Adjust the layout to avoid overlap
 plt.tight_layout()
 plt.show()
 
@@ -431,22 +416,14 @@ import matplotlib.pyplot as plt
 
 market2_df = market_df[['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase', 'condition']]
 
-# Create a PairGrid
+# Create a PairGrid to show scatterplots with regression lines.
+
 g = sns.PairGrid(market2_df, hue='condition')
-
-# Map regplot to the lower triangle
 g.map_lower(sns.regplot, scatter_kws={'alpha': 0.3})
-
-# Map kdeplot to the diagonal
 g.map_diag(sns.kdeplot)
-
-# Map scatterplot to the upper triangle
 g.map_upper(sns.scatterplot)
-
-# Add a legend
 g.add_legend()
 
-# Show the plot
 plt.show()
 ```
     
