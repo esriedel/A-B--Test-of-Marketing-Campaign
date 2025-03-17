@@ -316,7 +316,6 @@ plt.show()
 ![png](output_9_0.png)
 
 
-```
 ### Examining impact of marketing campaigns.
 
 
@@ -375,16 +374,18 @@ results_df = mann_whitney_multiple(market_df, group_column, outcome_columns)
 print(results_df)
 
 ```
-|Variable|U-Statistics|p-value|
-|---:|---:|---:|
-|Spend|257.0|.007|
-|Impressions     |   697.0 | 0.007|
-|Reach|719.0|>0.000|
-|Clicks|337.0|0.139|
-|Searches|346.0|0.180|
-|Content|442.0|0.921|
-|Cart|664.0|0.001|
-|Purchase|439.0|0.958|
+#### Tests of Difference Between Campaigns Using Mann Whitney U Test
+
+|Variable|U-Statistics|p-value|Outcom|
+|---:|---:|---:|---:|
+|Spend|257.0|.007|Spend higher for treatment|
+|Impressions     |   697.0 | 0.007|Impressions higher for control|
+|Reach|719.0|>0.000|Reach higher for control|
+|Clicks|337.0|0.139|No difference|
+|Searches|346.0|0.180|No difference|
+|Content|442.0|0.921|No difference|
+|Cart|664.0|0.001|Cart higher for control|
+|Purchase|439.0|0.958|No difference|
 
 
 ```python
