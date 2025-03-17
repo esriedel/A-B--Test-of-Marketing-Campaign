@@ -313,7 +313,7 @@ plt.show()
 ```
 
    
-![png](output_10_0.png)
+![png](output_9_0.png)
 
 
 ```
@@ -385,16 +385,6 @@ print(results_df)
 |Content|442.0|0.921|
 |Cart|664.0|0.001|
 |Purchase|439.0|0.958|
-
-Outcome  U-Statistic   p-value
-    0        Spend        257.0  0.007119
-    1  Impressions        697.0  0.000073
-    2        Reach        719.0  0.000017
-    3       Clicks        337.0  0.139330
-    4     Searches        346.0  0.179644
-    5      Content        442.0  0.921490
-    6         Cart        664.0  0.000531
-    7     Purchase        439.0  0.957675
 
 
 ```python
