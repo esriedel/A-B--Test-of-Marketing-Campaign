@@ -397,9 +397,11 @@ plt.show()
 
 
 
-### Looking for confounding relationships.
+## Looking for confounding relationships.
 
-#### The scatter graphs show the relationships between variables for each marketing condition. A univariate regresssion line is presented for each marketing condition in the graphs in the lower half. When the two lines are roughly parallel, there is no difference by marketing condition betwwen in the relationship between the two variables (e.g. Impressions and Reach) - that they work the same under either marketing campaign.  The different lines for the relationship between Cart and Purchase suggests this relationship may differ between marketing campaigns. This is tested in the detailed multivariate regression model below.
+### Spearman rank correlations between variables
+
+#### The heatmap below shows the strength of relationships between pairs of variables. The stronger the relationship, the higher the coefficient, and brighter red the indicator. There are particularly strong relationships between Reach, Impressions, Content, and Searches. However, only one of the variables (Cart) is related to the main outcome of Purchases.
 
 ```
 # Check for correlations among variables using Spearman Rank correlation coefficients.
@@ -417,8 +419,11 @@ plt.show()
 ```
     
 ![png](output_10_0.png)
-    
-``` 
+
+### Scatter graphs showing relationships between variables by each marketing condition
+
+#### A univariate regresssion line is presented for each marketing condition in the graphs in the lower half. When the two lines are roughly parallel, there is no difference by marketing condition betwwen in the relationship between the two variables (e.g. Impressions and Reach) - that they work the same under either marketing campaign.  The different lines for the relationship between Cart and Purchase suggests this relationship may differ between marketing campaigns. This is tested in the detailed multivariate regression model below.
+```
 
 python
 import seaborn as sns
@@ -444,8 +449,6 @@ g.add_legend()
 # Show the plot
 plt.show()
 ```
-
-
     
 ![png](output_14_0.png)
     
