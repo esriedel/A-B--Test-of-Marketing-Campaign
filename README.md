@@ -313,72 +313,14 @@ plt.show()
 ```
 
 
-    
-![png](output_9_0.png)
-    
-
-### Examining correlations between variables.
-
-```python
-# Check for correlations among variables using Spearman Rank correlation coefficients.
-
-outcome_df = market_df[['Day', 'Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']]
-
-spearman_corr_matrix = outcome_df.corr(method='spearman')
-
-# Create heatmap to check correlations.
-plt.figure(figsize=(8, 6))  
-sns.heatmap(spearman_corr_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
-plt.title('Spearman Correlation Heatmap')
-plt.show()
-
 ```
 
 
     
 ![png](output_10_0.png)
     
-
-### Examining differences between conditions by variables.
-
-```python
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# List of the variables you're interested in
-variables = ['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']
-
-# Set up the figure with subplots in a horizontal layout
-n_cols = 4  # Number of columns you want
-n_rows = len(variables) // n_cols + (len(variables) % n_cols > 0)  # Number of rows, based on the number of variables
-
-# Set up the figure with the right number of rows and columns
-fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 6 * n_rows))
-
-# Flatten axes array to easily index them
-axes = axes.flatten()
-
-# Loop through the variables and create a boxplot for each
-for i, var in enumerate(variables):
-    sns.boxplot(x="condition", y=var, data=market_df, ax=axes[i])
-    axes[i].set_title(f'Boxplot of {var} by Condition')
-
-# Remove unused subplots if any
-for j in range(i + 1, len(axes)):
-    axes[j].axis('off')  # Hide empty subplots
-
-# Adjust the layout to avoid overlap
-plt.tight_layout()
-plt.show()
-
-
 ```
-
-
-    
-![png](output_11_0.png)
-    
-
+### Examining impact of marketing campaigns.
 
 
 ```python
@@ -388,16 +330,13 @@ print("\nMedians by Category (using pivot_table()):\n", medians_pivot)
 ```
 
     
-    Medians by Category (using pivot_table()):
-                  Cart  Clicks  Content  Impressions  Purchase    Reach  Searches  \
-    condition                                                                      
-    0          1339.0  5224.0   1984.0     113430.0     501.0  91579.0    2390.0   
-    1           974.0  6242.5   1881.0      68853.5     500.0  44219.5    2395.5   
-    
-                Spend  
-    condition          
-    0          2319.0  
-    1          2584.0  
+##### Medians by Category 
+
+|Campaign | Cart | Clicks | Content | Impressions | Purchase | Reach | Searches | Spend |
+|:---|---:|---:| ---:|---:|---:|---:|---:|---:|
+|Control (0)      | 1339.0  |5224.0  | 1984.0     |113430.0    | 501.0  |1579.0  |  2390.0| 2319.0|
+|Treatment (1) | 974.0 | 6242.5 |  1881.0|      68853.5  |   500.0 | 44219.5 |   2395.5| 2584.0|
+
 
 
 
@@ -439,8 +378,18 @@ results_df = mann_whitney_multiple(market_df, group_column, outcome_columns)
 print(results_df)
 
 ```
+|Variable|U-Statistics|p-value|
+|---:|---:|---:|
+|Spend|257.0|.007|
+|Impressions     |   697.0 | 0.007|
+|Reach|719.0|>0.000|
+|Clicks|337.0|0.139|
+|Searches|346.0|0.180|
+|Content|442.0|0.921|
+|Cart|664.0|0.001|
+|Purchase|439.0|0.958|
 
-           Outcome  U-Statistic   p-value
+Outcome  U-Statistic   p-value
     0        Spend        257.0  0.007119
     1  Impressions        697.0  0.000073
     2        Reach        719.0  0.000017
@@ -451,8 +400,70 @@ print(results_df)
     7     Purchase        439.0  0.957675
 
 
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# List of the variables you're interested in
+variables = ['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']
+
+# Set up the figure with subplots in a horizontal layout
+n_cols = 4  # Number of columns you want
+n_rows = len(variables) // n_cols + (len(variables) % n_cols > 0)  # Number of rows, based on the number of variables
+
+# Set up the figure with the right number of rows and columns
+fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 6 * n_rows))
+
+# Flatten axes array to easily index them
+axes = axes.flatten()
+
+# Loop through the variables and create a boxplot for each
+for i, var in enumerate(variables):
+    sns.boxplot(x="condition", y=var, data=market_df, ax=axes[i])
+    axes[i].set_title(f'Boxplot of {var} by Condition')
+
+# Remove unused subplots if any
+for j in range(i + 1, len(axes)):
+    axes[j].axis('off')  # Hide empty subplots
+
+# Adjust the layout to avoid overlap
+plt.tight_layout()
+plt.show()
+
+
+```
+
+
+    
+![png](output_11_0.png)
+    
+
+
+```
+
+    
+![png](output_9_0.png)
+    
+```
+
+### Looking for confounding relationships.
 
 ```python
+# Check for correlations among variables using Spearman Rank correlation coefficients.
+
+outcome_df = market_df[['Day', 'Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']]
+
+spearman_corr_matrix = outcome_df.corr(method='spearman')
+
+# Create heatmap to check correlations.
+plt.figure(figsize=(8, 6))  
+sns.heatmap(spearman_corr_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
+plt.title('Spearman Correlation Heatmap')
+plt.show()
+
+
+
+python
 import seaborn as sns
 import matplotlib.pyplot as plt
 
