@@ -292,6 +292,12 @@ plt.show()
 
 ### Examining impact of marketing campaigns.
 
+#### The impact of the two marketing campaigns is seen by looking at whether the two campaigns make a difference in accessing the website (clicks, content, reach, searches, impressions, intending to purchase (Cart), and actual purchases from the website (Purchase). An additional variable of amound of spend for each marketing campaign is also included for context. 
+
+#### Differences are presented by median levels, statistical differences using the Mann Whitney U Test, and visually through clustered boxplots by marketing campaign.
+
+#### The control group generated more impressions, reach, and items in the cart (though not actual purchases), while the treatment group received a greater amount of spend for marketing during the campaign.
+
 
 ```python
 # Look at medians by condition
