@@ -40,7 +40,7 @@ import matplotlib.pyplot as plt
 ```
 
 ```python
-# Upload and join datasets
+# Uploading and joining datasets. Resetting index.
 control_df = pd.read_csv("control_group.csv", delimiter=";")
 treatment_df = pd.read_csv("test_group.csv", delimiter=";")
 
@@ -226,8 +226,7 @@ market_df['Date2'] = date_obj
 ```
 
 ```python
-# Importing LabelEncoder from Sklearn library from preprocessing Module.
-# Change string variable of campaign into numeric variable.
+# Changing string "Campaign" variable into numeric (condition) variable for easier manipulation.
 
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
@@ -257,17 +256,12 @@ plt.show()
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# List of the variables you're interested in
 variables = ['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']
 
 # Set up the figure with subplots in a horizontal layout
 n_cols = 2  # Number of columns you want
 n_rows = len(variables) // n_cols + (len(variables) % n_cols > 0)  # Number of rows, based on the number of variables
-
-# Set up the figure with the right number of rows and columns
 fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 6 * n_rows))
-
-# Flatten axes array to easily index them
 axes = axes.flatten()
 
 # Loop through the variables and create a line plot for each
