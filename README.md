@@ -396,21 +396,12 @@ plt.show()
 ```
 
 
-    
-![png](output_11_0.png)
-    
-
-
-```
-
-    
-![png](output_9_0.png)
-    
-```
 
 ### Looking for confounding relationships.
 
-```python
+#### The scatter graphs show the relationships between variables for each marketing condition. A univariate regresssion line is presented for each marketing condition in the graphs in the lower half. When the two lines are roughly parallel, there is no difference by marketing condition betwwen in the relationship between the two variables (e.g. Impressions and Reach) - that they work the same under either marketing campaign.  The different lines for the relationship between Cart and Purchase suggests this relationship may differ between marketing campaigns. This is tested in the detailed multivariate regression model below.
+
+```
 # Check for correlations among variables using Spearman Rank correlation coefficients.
 
 outcome_df = market_df[['Day', 'Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']]
@@ -423,7 +414,11 @@ sns.heatmap(spearman_corr_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
 plt.title('Spearman Correlation Heatmap')
 plt.show()
 
-
+```
+    
+![png](output_11_0.png)
+    
+``` 
 
 python
 import seaborn as sns
@@ -455,7 +450,9 @@ plt.show()
 ![png](output_14_0.png)
     
 
-### Examining the relationship between campaign, number of items in cart, and purchases: Controlling for number of items in cart, campaign condition does not make a statistically significant contribution to purchases.
+### Examining the relationship between campaign, number of items in cart, and purchases.
+
+#### Controlling for number of items in cart, campaign condition does not make a statistically significant contribution to purchases.
 
 ```python
 import statsmodels.api as sm
