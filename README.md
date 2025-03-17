@@ -416,7 +416,7 @@ plt.show()
 
 ```
     
-![png](output_11_0.png)
+![png](output_10_0.png)
     
 ``` 
 
