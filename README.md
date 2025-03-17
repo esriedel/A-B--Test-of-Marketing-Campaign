@@ -312,13 +312,10 @@ plt.tight_layout()
 plt.show()
 ```
 
-
-```
-
-
-    
+   
 ![png](output_10_0.png)
-    
+
+
 ```
 ### Examining impact of marketing campaigns.
 
