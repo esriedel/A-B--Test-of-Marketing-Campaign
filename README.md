@@ -265,6 +265,9 @@ market_df.info()
 
 ### Examining distributions of variables.
 
+#### Histograms below show variables generally have uniform or non-normal distribution. Searches and Content appear to each have an outlier. Given the small sample size and non-normal distributions, non-parametric tests will be used for testing differences between marketing campaigns. Non-parametric statistics are less sensitive to outliers.
+
+
 ```python
 market_df.hist(figsize=(20, 18))  
 plt.show()
@@ -273,6 +276,8 @@ plt.show()
 ![png](output_8_0.png)
     
 ### Examining distribution of variables by condition over time.
+
+#### Since the two marketing campaigns were conducted and measured on the same days, I wanted to check on common variance between the two marketing conditions that would call into question using an assumption of independent samples in testing differences. Over-time trends appeared random over time and not correlated between the two campaigns. A non-parametric test assuming independence of samples will be used (Mann Whitley U Test).
 
 ```python
 import seaborn as sns
