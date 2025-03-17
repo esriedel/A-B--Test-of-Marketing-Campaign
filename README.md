@@ -1,4 +1,4 @@
-# A-B-Testing of Marketing Campaign
+# A-B-Test of Marketing Campaign
 
 ## Summary
 
@@ -216,12 +216,8 @@ market_df.describe()
 ```python
 # Convert date into datetime variable in python for better manipulation.
 
-import pandas as pd
-
 Date = market_df['Date']
-
 date_obj = pd.to_datetime(Date, dayfirst=True,format="mixed")
-
 market_df['Date2'] = date_obj
 ```
 
@@ -253,8 +249,6 @@ plt.show()
 #### Since the two marketing campaigns were conducted and measured on the same days, I wanted to check on common variance between the two marketing conditions that would call into question using an assumption of independent samples in testing differences. Over-time trends appeared random over time and not correlated between the two campaigns. A non-parametric test assuming independence of samples will be used (Mann Whitney U Test). If there was strong correlation over time, then I would consider a paired test such Wilcoxon Signed-Rank test.
 
 ```python
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 #Show subplots of variables over time by condition
 variables = ['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']
@@ -354,23 +348,17 @@ print(results_df)
 
 
 ```python
-import seaborn as sns
-import matplotlib.pyplot as plt
-
 # Create boxplots of variables by condition
 variables = ['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase']
 
 n_cols = 4  # Number of columns you want
 n_rows = len(variables) // n_cols + (len(variables) % n_cols > 0)  # Number of rows, based on the number of variables
-
 fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 6 * n_rows))
-
 axes = axes.flatten()
 
 for i, var in enumerate(variables):
     sns.boxplot(x="condition", y=var, data=market_df, ax=axes[i])
     axes[i].set_title(f'Boxplot of {var} by Condition')
-
 for j in range(i + 1, len(axes)):
     axes[j].axis('off')  # Hide empty subplots
 
@@ -411,8 +399,6 @@ plt.show()
 ```
 
 python
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 market2_df = market_df[['Spend', 'Impressions', 'Reach', 'Clicks', 'Searches', 'Content', 'Cart', 'Purchase', 'condition']]
 
