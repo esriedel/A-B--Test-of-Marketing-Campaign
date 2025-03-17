@@ -39,7 +39,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 ```
 
-
 ```python
 # Upload and join datasets
 control_df = pd.read_csv("control_group.csv", delimiter=";")
@@ -76,8 +75,6 @@ market_df.info()
     dtypes: float64(7), int64(2), object(2)
     memory usage: 5.3+ KB
 
-
-
 ```python
 # Drop missing case.
 market_df.drop(index=4, inplace=True)
@@ -90,12 +87,13 @@ market_df.drop(index=4, inplace=True)
 market_df.rename(columns={'index': 'Day', 'Campaign Name': 'Campaign', 'Spend [USD]': 'Spend', '# of Impressions': 'Impressions', '# of Website Clicks': 'Clicks', '# of Searches': 'Searches', '# of View Content': 'Content', '# of Add to Cart': 'Cart', '# of Purchase': 'Purchase'}, inplace=True)
 ```
 
-### Check on descriptives
+
+### Run descriptive statistics. 
 
 ```
 market_df.describe()
-```
 
+```
 
 <table border="1" class="dataframe">
   <thead>
@@ -213,7 +211,6 @@ market_df.describe()
 </table>
 </div>
 
-
 ### Recode date variable into datetime. Convert Campaign into numeric condition variable.
 
 ```python
@@ -228,7 +225,6 @@ date_obj = pd.to_datetime(Date, dayfirst=True,format="mixed")
 market_df['Date2'] = date_obj
 ```
 
-
 ```python
 # Importing LabelEncoder from Sklearn library from preprocessing Module.
 # Change string variable of campaign into numeric variable.
@@ -238,30 +234,8 @@ le = LabelEncoder()
 condition = le.fit_transform(market_df['Campaign'])
 market_df["condition"] = condition
 
-market_df.info()
 ```
-
-    <class 'pandas.core.frame.DataFrame'>
-    Index: 59 entries, 0 to 59
-    Data columns (total 13 columns):
-     #   Column       Non-Null Count  Dtype         
-    ---  ------       --------------  -----         
-     0   Day          59 non-null     int64         
-     1   Campaign     59 non-null     object        
-     2   Date         59 non-null     object        
-     3   Spend        59 non-null     int64         
-     4   Impressions  59 non-null     float64       
-     5   Reach        59 non-null     float64       
-     6   Clicks       59 non-null     float64       
-     7   Searches     59 non-null     float64       
-     8   Content      59 non-null     float64       
-     9   Cart         59 non-null     float64       
-     10  Purchase     59 non-null     float64       
-     11  Date2        59 non-null     datetime64[ns]
-     12  condition    59 non-null     int64         
-    dtypes: datetime64[ns](1), float64(7), int64(3), object(2)
-    memory usage: 6.5+ KB
-
+## Exploratory Data Analysis
 
 ### Examining distributions of variables.
 
