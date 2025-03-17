@@ -2,6 +2,9 @@
 
 ## Summary
 
+* No evidence that treatment campaign outperformed control campaign.
+* Control campaign generated more impressions, content, and items in the cart.
+* Suggestive data that under treatment campaign, items in the cart were more likely to be translated into purchases.
 
 ## Introduction
 
